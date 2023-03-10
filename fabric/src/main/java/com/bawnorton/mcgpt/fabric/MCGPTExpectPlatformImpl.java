@@ -41,7 +41,7 @@ public class MCGPTExpectPlatformImpl {
     }
 
     private static void registerAuthCommand(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        LiteralArgumentBuilder<FabricClientCommandSource> builder = ClientCommandManager.literal("mcpgt-auth")
+        LiteralArgumentBuilder<FabricClientCommandSource> builder = ClientCommandManager.literal("mcgpt-auth")
                 .then(ClientCommandManager.argument("token", StringArgumentType.string()).executes(context -> {
                     FabricClientCommandSource source = context.getSource();
                     String token = StringArgumentType.getString(context, "token");
