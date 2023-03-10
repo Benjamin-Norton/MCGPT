@@ -8,9 +8,4 @@ public class MCGPTExpectPlatform {
     public static void registerCommands() {
         throw new AssertionError();
     }
-
-    @ExpectPlatform
-    public static void registerOpenAIService() {
-
-    }
 }
