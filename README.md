@@ -12,8 +12,11 @@ MCGPT
 - Use `/mcgpt-auth <token>` with your OpenAI token to authenticate with the API
   - You can get a token from [OpenAI API Keys](https://platform.openai.com/account/api-keys)
 - Use `/ask <question>` to ask the model a question, the model will respond in the chat with context from the last 10 messages.
-- Use `/nextconversation` to start a new conversation with the model or go to the next conversation if `/previousconversation` has been used
-- Use `/previousconversation` to go back to the previous conversation with the model
+- Use `/nextconversation` go to the next conversation, or start a new conversation with the model.
+- Use `/previousconversation` to go back to the previous conversation with the model.
+- Use `/setconversation <conversationid>` to set the conversation with the model to a specific conversation.
+- Use `/listconversations` to list all the conversations you have had with the model.
+  - This will provide the conversation id, and the last message you sent in the conversation.
 
 ### Installation
 #### Requires Architectury
