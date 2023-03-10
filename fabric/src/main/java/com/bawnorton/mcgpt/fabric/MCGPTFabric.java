@@ -1,11 +1,11 @@
 package com.bawnorton.mcgpt.fabric;
 
-import com.bawnorton.mcgpt.MCGPT;
-import net.fabricmc.api.ModInitializer;
+import com.bawnorton.mcgpt.MCGPTClient;
+import net.fabricmc.api.ClientModInitializer;
 
-public class MCGPTFabric implements ModInitializer {
+public class MCGPTFabric implements ClientModInitializer {
     @Override
-    public void onInitialize() {
-        MCGPT.init();
+    public void onInitializeClient() {
+        MCGPTClient.init();
     }
 }

@@ -1,9 +1,11 @@
 {
-  "mcchatgpt.auth.success": "§b[MCGPT]: §aSuccessfully Authenticated",
-  "mcchatgpt.auth.message1": "§cPlease authenticate with an OpenAI token using /mcgpt-auth <token>",
-  "mcchatgpt.auth.message2": "§cIf you do not have a token, you can generate one here:",
-  "mcchatgpt.ask.error": "§b[MCGPT]: §cAn error occurred while communicating with OpenAI. Please check your internet connection, or try again later.",
-  "mcchatgpt.auth.invalid.token": "§b[MCGPT]: §cInvalid token.",
-  "mcchatgpt.conversation.new": "§b[MCGPT]: §fStarted a new conversation (%s)",
-  "mcchatgpt.conversation.continue": "§b[MCGPT]: §fContinuing conversation (%s)"
+  "mcgpt.auth.success": "§b[MCGPT]: §aSuccessfully Authenticated",
+  "mcgpt.auth.message1": "§cPlease authenticate with an OpenAI token using /mcgpt-auth <token>",
+  "mcgpt.auth.message2": "§cIf you do not have a token, you can generate one here:",
+  "mcgpt.auth.invalid.token": "§b[MCGPT]: §cInvalid token.",
+  "mcgpt.ask.error": "§b[MCGPT]: §cAn error occurred while communicating with OpenAI. Please check your internet connection, or try again later.",
+  "mcgpt.conversation.new": "§b[MCGPT]: §fStarted a new conversation (%s)",
+  "mcgpt.conversation.continue": "§b[MCGPT]: §fContinuing conversation (%s)",
+  "mcgpt.conversation.list": "§b[MCGPT]: §fConversations:",
+  "mcgpt.conversation.invalid": "§b[MCGPT]: §cInvalid conversation ID."
 }

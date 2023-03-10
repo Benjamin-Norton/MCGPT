@@ -1,6 +1,5 @@
 package com.bawnorton.mcgpt;
 
-import com.bawnorton.mcgpt.command.Commands;
 import com.bawnorton.mcgpt.config.Config;
 import com.bawnorton.mcgpt.config.ConfigManager;
 import com.bawnorton.mcgpt.store.SecureTokenStorage;
@@ -22,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MCGPT {
+public class MCGPTClient {
     public static final String MOD_ID = "mcgpt";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
@@ -39,7 +38,7 @@ public class MCGPT {
     public static void init() {
         conversations = new ArrayList<>();
 
-        Commands.init();
+        MCGPTExpectPlatform.registerCommands();
         ConfigManager.loadConfig();
 
         if(!Config.getInstance().token.isEmpty()) {
@@ -48,7 +47,7 @@ public class MCGPT {
 
         ClientPlayerEvent.CLIENT_PLAYER_JOIN.register(player -> {
             if(!notAuthed(false)) {
-                player.sendMessage(Text.translatable("mcchatgpt.auth.success"));
+                player.sendMessage(Text.translatable("mcgpt.auth.success"));
             }
         });
     }
@@ -65,8 +64,8 @@ public class MCGPT {
         if(service == null) {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if(player != null && prompt) {
-                player.sendMessage(Text.translatable("mcchatgpt.auth.message1"));
-                player.sendMessage(Text.translatable("mcchatgpt.auth.message2"));
+                player.sendMessage(Text.translatable("mcgpt.auth.message1"));
+                player.sendMessage(Text.translatable("mcgpt.auth.message2"));
                 player.sendMessage(Text.literal("§chttps://platform.openai.com/account/api-keys").styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://platform.openai.com/account/api-keys"))));
             }
             return true;
@@ -74,8 +73,18 @@ public class MCGPT {
         return false;
     }
 
+    public static List<List<ChatMessage>> getConversations() {
+        return conversations;
+    }
+
     public static int getConversationIndex() {
         return conversationIndex;
+    }
+
+    public static void setConversationIndex(int index) {
+        if(index >= 0 && index < conversations.size()) {
+            conversationIndex = index;
+        }
     }
 
     public static boolean nextConversation() {
@@ -86,7 +95,7 @@ public class MCGPT {
         }
         conversations.add(new ArrayList<>());
         conversationIndex = conversations.size() - 1;
-        conversations.get(conversationIndex).add(new ChatMessage("system", "You are an AI assistant in the game Minecraft. You are using the in game chat to communicate, thus, your responses should be quite short (256 characters max). Assume the player cannot access commands unless they explicitly ask for them."));
+        conversations.get(conversationIndex).add(new ChatMessage("system", "Context: You are an AI assistant in the game Minecraft. Limit your responses to 256 characters. Assume the player cannot access commands unless explicitly asked for them. Do not simulate conversations"));
         return true;
     }
 
@@ -118,7 +127,7 @@ public class MCGPT {
             }
             player.sendMessage(Text.of("<ChatGPT> " + reply.getContent().replaceAll("^\\s+|\\s+$", "")), false);
         } catch (RuntimeException e) {
-            player.sendMessage(Text.translatable("mcchatgpt.ask.error").setStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of(e.getMessage())))));
+            player.sendMessage(Text.translatable("mcgpt.ask.error").setStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of(e.getMessage())))));
         }
     }
 

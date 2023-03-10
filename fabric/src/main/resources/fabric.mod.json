@@ -15,7 +15,7 @@
   "icon": "assets/mcgpt/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "client": [
       "com.bawnorton.mcgpt.fabric.MCGPTFabric"
     ]
   },

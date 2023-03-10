@@ -1,6 +1,6 @@
 package com.bawnorton.mcgpt.config;
 
-import com.bawnorton.mcgpt.MCGPT;
+import com.bawnorton.mcgpt.MCGPTClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -12,7 +12,7 @@ import java.nio.file.Path;
 
 public class ConfigManager {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path configPath = Platform.getConfigFolder().resolve(MCGPT.MOD_ID + ".json");
+    private static final Path configPath = Platform.getConfigFolder().resolve(MCGPTClient.MOD_ID + ".json");
 
     public static void loadConfig() {
         Config config = load();
@@ -20,12 +20,12 @@ public class ConfigManager {
         if (config.token == null || config.secret == null) {
             config.token = "";
             config.secret = "";
-            MCGPT.LOGGER.info("Token or secret not found, resetting");
+            MCGPTClient.LOGGER.info("Token or secret not found, resetting");
         }
 
         Config.update(config);
         save();
-        MCGPT.LOGGER.info("Loaded config");
+        MCGPTClient.LOGGER.info("Loaded config");
     }
 
     private static Config load() {
@@ -39,11 +39,11 @@ public class ConfigManager {
             try {
                 config = GSON.fromJson(Files.newBufferedReader(configPath), Config.class);
             } catch (JsonSyntaxException e) {
-                MCGPT.LOGGER.error("Failed to parse config file, using default config");
+                MCGPTClient.LOGGER.error("Failed to parse config file, using default config");
                 config = Config.getInstance();
             }
         } catch (IOException e) {
-            MCGPT.LOGGER.error("Failed to load config", e);
+            MCGPTClient.LOGGER.error("Failed to load config", e);
         }
         return config == null ? Config.getInstance() : config;
     }
@@ -52,12 +52,12 @@ public class ConfigManager {
         try {
             Files.write(configPath, GSON.toJson(Config.getInstance()).getBytes());
         } catch (IOException e) {
-            MCGPT.LOGGER.error("Failed to save config", e);
+            MCGPTClient.LOGGER.error("Failed to save config", e);
         }
     }
 
     public static void saveConfig() {
         save();
-        MCGPT.LOGGER.info("Saved config");
+        MCGPTClient.LOGGER.info("Saved config");
     }
 }
