@@ -4,6 +4,7 @@
   "mcgpt.auth.message2": "§cIf you do not have a token, you can generate one here:",
   "mcgpt.auth.invalid.token": "§b[MCGPT]: §cInvalid token.",
   "mcgpt.ask.error": "§b[MCGPT]: §cAn error occurred while communicating with OpenAI. Please check your internet connection, or try again later.",
+  "mcgpt.ask.quota": "§b[MCGPT]: §cYou have exceeded your current OpenAI API quota. Click me to view your plan and billing details.",
   "mcgpt.conversation.new": "§b[MCGPT]: §fStarted a new conversation (%s)",
   "mcgpt.conversation.continue": "§b[MCGPT]: §fContinuing conversation (%s)",
   "mcgpt.conversation.list": "§b[MCGPT]: §fConversations:",
