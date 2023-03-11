@@ -127,7 +127,12 @@ public class MCGPTClient {
             }
             player.sendMessage(Text.of("<ChatGPT> " + reply.getContent().replaceAll("^\\s+|\\s+$", "")), false);
         } catch (RuntimeException e) {
-            player.sendMessage(Text.translatable("mcgpt.ask.error").setStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of(e.getMessage())))));
+            MCGPTClient.LOGGER.error("Error while communicating with OpenAI", e);
+            if(e.getMessage().toLowerCase().contains("exceeded your current quota")) {
+                player.sendMessage(Text.translatable("mcgpt.ask.quota").setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://platform.openai.com/account/usage")).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of("https://platform.openai.com/account/usage")))));
+            } else {
+                player.sendMessage(Text.translatable("mcgpt.ask.error").setStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of(e.getMessage())))));
+            }
         }
     }
 
